@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import Photo, { PhotoProps } from "./Photo";
 
 const PhotoItem = (photoItem: PhotoProps) => {

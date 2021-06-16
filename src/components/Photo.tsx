@@ -12,11 +12,11 @@ const Photo = ({ id, server, secret, title }: PhotoProps) => {
     <>
       <img
         src={`https://live.staticflickr.com/${server}/${id}_${secret}.jpg`}
-        className=""
-        alt="logo"
+        className="photo"
+        alt="photo"
       />
       <div className="overlay-container">
-        <h4>{title}</h4>
+        <span className="photo-title">{title}</span>
         <button className="add-favorite">Fovarite </button>
       </div>
     </>
