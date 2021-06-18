@@ -3,6 +3,7 @@ import { getPhotos } from "../shared/PhotosService";
 import { PhotosResponse, PhotoModel } from "../shared/ResponseModels";
 import PhotoItem from "./PhotoItem";
 import PhotoLastItem from "./PhotoLastItem";
+import FavoritePhotos from "./FavoritePhotos";
 
 export interface PhotosProps {}
 
@@ -11,6 +12,7 @@ const Photos = () => {
   const [page, setPage] = useState<number>(1);
   const [pages, setPages] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showFavorite, setShowFavorite] = useState<boolean>(false);
   const [fetchMore, setFetchMore] = useState<boolean>(true);
   const observer = useRef<any>();
   const lastPhotoItem = useCallback(
@@ -58,25 +60,38 @@ const Photos = () => {
       });
   }, [page]);
 
+  const handleFavoritesClick = () => {
+    setShowFavorite(!showFavorite);
+  };
+
   return (
-    <div className="images-container">
-      <ul className="images-list">
-        {photos.map((photo: PhotoModel, index: number) => {
-          const { id } = photo;
-          if (photos.length === index + 1) {
-            return (
-              <PhotoLastItem
-                key={`${id}_${index}`}
-                {...photo}
-                getLastPhotoItem={lastPhotoItem}
-              />
-            );
-          } else {
-            return <PhotoItem key={`${id}_${index}`} {...photo} />;
-          }
-        })}
-      </ul>
-    </div>
+    <>
+      <div className="images-container">
+        <button className="show-favorites" onClick={handleFavoritesClick}>
+          Show Favorites
+        </button>
+        <ul className="images-list">
+          {photos.map((photo: PhotoModel, index: number) => {
+            const { id } = photo;
+            if (photos.length === index + 1) {
+              return (
+                <PhotoLastItem
+                  key={`${id}_${index}`}
+                  {...photo}
+                  getLastPhotoItem={lastPhotoItem}
+                />
+              );
+            } else {
+              return <PhotoItem key={`${id}_${index}`} {...photo} />;
+            }
+          })}
+        </ul>
+      </div>
+
+      {showFavorite && (
+        <FavoritePhotos handleModalClose={handleFavoritesClick} />
+      )}
+    </>
   );
 };
 
