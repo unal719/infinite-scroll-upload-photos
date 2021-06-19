@@ -3,7 +3,7 @@ import Photo, { PhotoProps } from "./Photo";
 
 const PhotoItem = (photoItem: PhotoProps) => {
   return (
-    <li className="image-item">
+    <li className="image-item" ref={photoItem.lastPhoto}>
       <Photo {...photoItem} />
     </li>
   );

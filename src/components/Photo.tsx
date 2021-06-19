@@ -7,6 +7,7 @@ export interface PhotoProps {
   secret: string;
   title: string;
   viewType?: string;
+  lastPhoto?: any;
 }
 
 const Photo = ({ id, server, secret, title, viewType }: PhotoProps) => {
@@ -47,10 +48,11 @@ const Photo = ({ id, server, secret, title, viewType }: PhotoProps) => {
 
   return (
     <>
-      <img
-        src={`https://live.staticflickr.com/${server}/${id}_${secret}.jpg`}
+      <div
+        style={{
+          backgroundImage: `url("https://live.staticflickr.com/${server}/${id}_${secret}.jpg")`,
+        }}
         className="photo"
-        alt="photo"
       />
       <div className="overlay-container">
         <span className="photo-title">{title}</span>
