@@ -1,4 +1,4 @@
-import { getCookies, resetCookieByName } from "./../src/shared/Helper";
+import { getCookies, resetCookieByName } from "../shared/Helper";
 
 describe("helpers", () => {
   describe("getCookies", () => {
